@@ -32,11 +32,4 @@ class Asm
         $this->groups_to_display = $groups_to_display;
         return $this;
     }
-
-    public function toArray()
-    {
-        return array_filter(json_decode(json_encode($this), true), function ($val) {
-            return !empty($val);
-        });
-    }
 }

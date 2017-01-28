@@ -12,4 +12,26 @@ class Bcc
      * @var string
      */
     public $email;
+
+    /**
+     * @param boolean $enable
+     * @return Bcc
+     */
+    public function setEnable($enable)
+    {
+        $this->enable = $enable;
+        return $this;
+    }
+
+    /**
+     * @param string $email
+     * @return Bcc
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+
 }

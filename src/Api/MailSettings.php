@@ -1,7 +1,6 @@
 <?php
 namespace Sichikawa\SendgridApiBuilder\Api;
 
-
 use Sichikawa\SendgridApiBuilder\Api\MailSettings\Bcc;
 use Sichikawa\SendgridApiBuilder\Api\MailSettings\BypassListManagement;
 use Sichikawa\SendgridApiBuilder\Api\MailSettings\Footer;
@@ -83,12 +82,5 @@ class MailSettings
     {
         $this->spam_check = $spam_check;
         return $this;
-    }
-
-    public function toArray()
-    {
-        return array_filter(json_decode(json_encode($this), true), function ($val) {
-            return !empty($val);
-        });
     }
 }

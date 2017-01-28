@@ -1,0 +1,22 @@
+{
+    "name": "s-ichikawa/sendgrid-api-builder",
+    "description": "This library adds a 'sendgrid' mail driver to Laravel.",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sichikawa\\SendgridApiBuilder\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "shingo.ichikawa",
+            "email": "ichikawa.shingo.0829@gmail.com"
+        }
+    ]
+}

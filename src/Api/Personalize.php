@@ -1,9 +1,12 @@
 <?php
 namespace Sichikawa\SendgridApiBuilder\Api;
 
-use Sichikawa\SendgridApiBuilder\Api\Email\Bcc;
-use Sichikawa\SendgridApiBuilder\Api\Email\Cc;
-use Sichikawa\SendgridApiBuilder\Api\Email\To;
+use Sichikawa\SendgridApiBuilder\Api\Personalize\Bcc;
+use Sichikawa\SendgridApiBuilder\Api\Personalize\Cc;
+use Sichikawa\SendgridApiBuilder\Api\Personalize\CustomArgs;
+use Sichikawa\SendgridApiBuilder\Api\Personalize\Headers;
+use Sichikawa\SendgridApiBuilder\Api\Personalize\Substitutions;
+use Sichikawa\SendgridApiBuilder\Api\Personalize\To;
 
 class Personalize
 {
@@ -28,17 +31,17 @@ class Personalize
     public $subject;
 
     /**
-     * @var array
+     * @var Headers
      */
     public $headers;
 
     /**
-     * @var array
+     * @var Substitutions
      */
     public $substitutions;
 
     /**
-     * @var array
+     * @var CustomArgs
      */
     public $custom_args;
 
@@ -48,13 +51,12 @@ class Personalize
     public $send_at;
 
     /**
-     * @param $email
-     * @param null $name
+     * @param array $to
      * @return $this
      */
-    public function setTo($email, $name = null)
+    public function setTo($to)
     {
-        $this->to = new To($email, $name);
+        $this->to = $to;
         return $this;
     }
 
@@ -63,9 +65,19 @@ class Personalize
      * @param null $name
      * @return $this
      */
-    public function setCc($email, $name = null)
+    public function addTo($email, $name = null)
     {
-        $this->cc = new Cc($email, $name);
+        $this->to[] = new To($email, $name);
+        return $this;
+    }
+
+    /**
+     * @param array $cc
+     * @return $this
+     */
+    public function setCc($cc)
+    {
+        $this->cc = $cc;
         return $this;
     }
 
@@ -74,9 +86,30 @@ class Personalize
      * @param null $name
      * @return $this
      */
-    public function setBcc($email, $name = null)
+    public function addCc($email, $name = null)
     {
-        $this->bcc = new Bcc($email, $name);
+        $this->cc[] = new Cc($email, $name);
+        return $this;
+    }
+
+    /**
+     * @param array $bcc
+     * @return $this
+     */
+    public function setBcc($bcc)
+    {
+        $this->bcc = $bcc;
+        return $this;
+    }
+
+    /**
+     * @param $email
+     * @param null $name
+     * @return $this
+     */
+    public function addBcc($email, $name = null)
+    {
+        $this->bcc[] = new Bcc($email, $name);
         return $this;
     }
 
@@ -91,7 +124,7 @@ class Personalize
     }
 
     /**
-     * @param array $headers
+     * @param Headers $headers
      * @return $this
      */
     public function setHeaders($headers)
@@ -105,9 +138,46 @@ class Personalize
      * @param $value
      * @return $this
      */
+    public function addHeaders($key, $value)
+    {
+        if (empty($this->headers)) {
+            $this->headers = new Headers();
+        }
+        $this->headers->$key = $value;
+        return $this;
+    }
+
+    /**
+     * @param array $substitutions
+     * @return $this
+     */
+    public function setSubstitutions($substitutions)
+    {
+        $this->substitutions = $substitutions;
+        return $this;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return $this
+     */
     public function addSubstitutions($key, $value)
     {
+        if (empty($this->substitutions)) {
+            $this->substitutions = new Substitutions();
+        }
         $this->substitutions[$key] = $value;
+        return $this;
+    }
+
+    /**
+     * @param $custom_args
+     * @return $this
+     */
+    public function setCustomArgs($custom_args)
+    {
+        $this->custom_args = $custom_args;
         return $this;
     }
 
@@ -118,6 +188,9 @@ class Personalize
      */
     public function addCustomArgs($key, $value)
     {
+        if (empty($this->custom_args)) {
+            $this->custom_args = new CustomArgs();
+        }
         $this->custom_args[$key] = $value;
         return $this;
     }
@@ -128,13 +201,6 @@ class Personalize
     public function setSendAt($send_at)
     {
         $this->send_at = $send_at;
-    }
-
-    public function toArray()
-    {
-        return array_filter(json_decode(json_encode($this), true), function ($val) {
-            return !empty($val);
-        });
     }
 }
 

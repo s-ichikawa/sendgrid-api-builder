@@ -1,7 +1,7 @@
 <?php
-namespace Sichikawa\SendgridApiBuilder\Api\Email;
+namespace Sichikawa\SendgridApiBuilder\Api;
 
-abstract class Email
+class From
 {
     /**
      * To constructor.
@@ -23,4 +23,16 @@ abstract class Email
      * @var string
      */
     public $email;
+
+    /**
+     * @param string $name
+     * @return From
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+
 }
