@@ -6,7 +6,7 @@ SendGrid API Builder
 Add the package to your composer.json and run composer update.
 ```json
 "require": {
-    "s-ichikawa/sendgrid-api-builder": "^1.0"
+    "s-ichikawa/sendgrid-api-builder": "dev-master"
 },
 ```
 
