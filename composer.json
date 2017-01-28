@@ -1,6 +1,6 @@
 {
     "name": "s-ichikawa/sendgrid-api-builder",
-    "description": "This library adds a 'sendgrid' mail driver to Laravel.",
+    "description": "This library build a sendgrid api.",
     "license": "MIT",
     "require": {
         "php": ">=5.4"
