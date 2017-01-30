@@ -18,3 +18,9 @@ $ composer require s-ichikawa/sendgrid-api-builder
 ```
 
 #Usage
+```php
+class Sample
+{
+    use Send
+}
+```
