@@ -194,4 +194,11 @@ class SendGridApiTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
+    public function testSetTemplateId()
+    {
+        $this->mock->setTemplateId('abc-1234');
+        $this->assertEquals([
+            'template_id' => 'abc-1234',
+        ], $this->mock->getSgParams());
+    }
 }
