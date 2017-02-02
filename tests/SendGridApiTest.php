@@ -201,4 +201,16 @@ class SendGridApiTest extends \PHPUnit\Framework\TestCase
             'template_id' => 'abc-1234',
         ], $this->mock->getSgParams());
     }
+
+    public function testSetSection()
+    {
+        $section = new \Sichikawa\SendgridApiBuilder\Api\Sections();
+        $section->key = 'val';
+        $this->mock->setSection($section);
+        $this->assertEquals([
+            'section' => [
+                'key' => 'val',
+            ],
+        ], $this->mock->getSgParams());
+    }
 }
