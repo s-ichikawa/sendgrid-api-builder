@@ -22,5 +22,10 @@ $ composer require s-ichikawa/sendgrid-api-builder
 class Sample
 {
     use Send
+    
+    function test()
+    {
+        
+    }
 }
 ```
